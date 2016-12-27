@@ -24,4 +24,24 @@ RSpec.describe User, type: :model do
     it { should respond_to :pages }
     it { should respond_to :ups }
   end
+
+  describe "model methods" do
+    it "#comment" do
+      user = create(:user)
+      page = create(:page)
+      comment = user.comment("Nice page!", page)
+
+      expect(comment.body).to eq("Nice page!")
+      expect(comment.user).to eq(user)
+      expect(comment.page).to eq(page)
+      expect(comment.parent).to eq(nil)
+
+      comment2 = user.comment("This page sucks!", page, comment)
+
+      expect(comment2.body).to eq("This page sucks!")
+      expect(comment2.user).to eq(user)
+      expect(comment2.page).to eq(page)
+      expect(comment2.parent).to eq(comment)
+    end
+  end
 end

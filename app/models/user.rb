@@ -6,4 +6,10 @@ class User < ApplicationRecord
   has_many :comments
   has_many :pages, through: :comments
   has_many :ups
+
+  def comment(body, page, parent = nil)
+    comment = comments.create(body: body, page_id: page.id)
+    comment.update(parent_id: parent.id) if parent
+    comment
+  end
 end
