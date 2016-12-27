@@ -3,5 +3,5 @@ class Page < ApplicationRecord
   validates_uniqueness_of :url
 
   has_many :comments
-  has_many :users, through: :comments
+  has_many :commenters, through: :comments, source: :users
 end

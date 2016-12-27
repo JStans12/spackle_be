@@ -9,6 +9,7 @@ RSpec.describe Comment, type: :model do
   describe "relationships" do
     it { should respond_to :user }
     it { should respond_to :page }
+    it { should respond_to :ups }
     it { should respond_to :parent }
     it { should respond_to :children }
   end

@@ -9,6 +9,6 @@ RSpec.describe Page, type: :model do
 
   describe "relationships" do
     it { should respond_to :comments }
-    it { should respond_to :users }
+    it { should respond_to :commenters }
   end
 end

@@ -5,4 +5,5 @@ class User < ApplicationRecord
 
   has_many :comments
   has_many :pages, through: :comments
+  has_many :ups
 end

@@ -22,5 +22,6 @@ RSpec.describe User, type: :model do
   describe "relationships" do
     it { should respond_to :comments }
     it { should respond_to :pages }
+    it { should respond_to :ups }
   end
 end
