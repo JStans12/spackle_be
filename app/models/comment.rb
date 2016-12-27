@@ -3,10 +3,10 @@ class Comment < ApplicationRecord
 
   belongs_to :user
   belongs_to :page
-  has_many :ups
+  has_many :ups, dependent: :destroy
 
   belongs_to :parent, class_name: "Comment", foreign_key: "parent_id", required: false
-  has_many :children, class_name: "Comment", foreign_key: "parent_id"
+  has_many :children, class_name: "Comment", foreign_key: "parent_id", dependent: :destroy
 
   def score
     ups.sum(:value)
