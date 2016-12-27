@@ -18,4 +18,9 @@ RSpec.describe User, type: :model do
     it { should validate_uniqueness_of :name }
     it { should validate_uniqueness_of :email }
   end
+
+  describe "relationships" do
+    it { should respond_to :comments }
+    it { should respond_to :pages }
+  end
 end
