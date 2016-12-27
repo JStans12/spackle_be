@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20161227192805) do
   end
 
   create_table "ups", force: :cascade do |t|
-    t.string   "value"
+    t.integer  "value"
     t.integer  "user_id"
     t.integer  "comment_id"
     t.datetime "created_at", null: false

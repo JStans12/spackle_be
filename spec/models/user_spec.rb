@@ -43,5 +43,38 @@ RSpec.describe User, type: :model do
       expect(comment2.page).to eq(page)
       expect(comment2.parent).to eq(comment)
     end
+
+    it "#upvote" do
+      user = create(:user)
+      page = create(:page)
+      comment = user.comment("Nice page!", page)
+      vote = user.upvote(comment)
+
+      expect(vote.user).to eq(user)
+      expect(vote.comment).to eq(comment)
+      expect(vote.value).to eq(1)
+    end
+
+    it "#downvote" do
+      user = create(:user)
+      page = create(:page)
+      comment = user.comment("Nice page!", page)
+      vote = user.downvote(comment)
+
+      expect(vote.user).to eq(user)
+      expect(vote.comment).to eq(comment)
+      expect(vote.value).to eq(-1)
+    end
+
+    it "#novote" do
+      user = create(:user)
+      page = create(:page)
+      comment = user.comment("Nice page!", page)
+      vote = user.novote(comment)
+
+      expect(vote.user).to eq(user)
+      expect(vote.comment).to eq(comment)
+      expect(vote.value).to eq(0)
+    end
   end
 end

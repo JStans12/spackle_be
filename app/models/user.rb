@@ -12,4 +12,22 @@ class User < ApplicationRecord
     comment.update(parent_id: parent.id) if parent
     comment
   end
+
+  def upvote(comment)
+    vote = ups.find_or_create_by(comment_id: comment.id)
+    vote.update(value: 1)
+    vote
+  end
+
+  def downvote(comment)
+    vote = ups.find_or_create_by(comment_id: comment.id)
+    vote.update(value: -1)
+    vote
+  end
+
+  def novote(comment)
+    vote = ups.find_or_create_by(comment_id: comment.id)
+    vote.update(value: 0)
+    vote
+  end
 end
