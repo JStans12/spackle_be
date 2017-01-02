@@ -9,6 +9,6 @@ class Api::V1::CommentsController < ApiController
   private
 
     def url
-      request.headers.env.detect{|k, _| k =~ /^HTTP_PAGE_URL/}[1]
+      request.headers.env.detect{|k, _| k =~ /^HTTP_URL/}[1]
     end
 end
