@@ -5,4 +5,8 @@ class CommentSerializer < ActiveModel::Serializer
   def author
     AuthorSerializer.new(object.user).attributes
   end
+
+  def children
+    object.children.by_score
+  end
 end

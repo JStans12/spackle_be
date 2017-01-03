@@ -2,7 +2,7 @@ class Api::V1::CommentsController < ApiController
 
   def index
     page = Page.find_by(url: url)
-    comments = page.base_comments
+    comments = page.base_comments.by_score
     render json: comments
   end
 
