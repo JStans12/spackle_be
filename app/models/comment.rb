@@ -10,7 +10,7 @@ class Comment < ApplicationRecord
 
   def self.by_score
     select('comments.*', 'sum(ups.value) AS score')
-    .left_outer_joins(:ups)
+    .joins(:ups)
     .group('id')
     .order('score DESC')
   end
