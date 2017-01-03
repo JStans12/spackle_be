@@ -14,4 +14,3 @@ presidential_grace    = donald.comment("You both suck! Sad!", reddit, thoughtful
 
 taylor.downvote(unprovoked_aggression)
 kanye.downvote(thoughtful_response)
-donald.upvote(presidential_grace)
