@@ -21,7 +21,6 @@ RSpec.describe Comment, type: :model do
       page = create(:page)
       comment = user1.comment("Nice page!", page)
 
-      user1.upvote(comment)
       expect(comment.score).to eq(1)
 
       user2.upvote(comment)
@@ -32,6 +31,22 @@ RSpec.describe Comment, type: :model do
 
       user1.novote(comment)
       expect(comment.score).to eq(0)
+    end
+
+    context "#by_score" do
+      it "sorts a group of comments by score" do
+        user1, user2 = create_list(:user, 2)
+        page = create(:page)
+
+        comment = user1.comment("Nice page!", page)
+        comment2 = user1.comment("Dumb page!", page)
+        comment3 = user1.comment("Decent page!", page)
+
+        user2.upvote(comment)
+        user2.downvote(comment2)
+
+        expect(Comment.by_score).to eq([comment, comment3, comment2])
+      end
     end
   end
 end
