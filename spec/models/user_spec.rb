@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
 
   describe "enums" do
     it "role" do
-      j = User.create(name: "joey", email: "joey@hotmail.com")
+      j = User.create(name: "joey", email: "joey@hotmail.com", password: "p", password_confirmation: "p")
 
       expect(j.role).to eq("user")
       j.admin!
@@ -17,6 +17,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :email }
     it { should validate_uniqueness_of :name }
     it { should validate_uniqueness_of :email }
+    it { should have_secure_password }
   end
 
   describe "relationships" do

@@ -11,6 +11,7 @@ FactoryGirl.define do
   factory :user do
     name
     email
+    password "p"
     role 0
   end
 end

@@ -1,10 +1,10 @@
 User.destroy_all
 Page.destroy_all
 
-taylor     = User.create(name: "tswift", email: "tswift@hotmail.com")
-kanye      = User.create(name: "yeezy", email: "yeezy@hotmail.com")
-donald     = User.create(name: "yugehands", email: "yugehands@hotmail.com")
-taylor_fan = User.create(name: "kuntryboi69", email: "kuntryboi69@hotmail.com")
+taylor     = User.create(name: "tswift", email: "tswift@hotmail.com", password: "p", password_confirmation: "p")
+kanye      = User.create(name: "yeezy", email: "yeezy@hotmail.com", password: "p", password_confirmation: "p")
+donald     = User.create(name: "yugehands", email: "yugehands@hotmail.com", password: "p", password_confirmation: "p")
+taylor_fan = User.create(name: "kuntryboi69", email: "kuntryboi69@hotmail.com", password: "p", password_confirmation: "p")
 
 reddit = Page.create(url: "https://www.reddit.com/")
 
