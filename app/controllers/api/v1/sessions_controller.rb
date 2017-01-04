@@ -3,7 +3,7 @@ class Api::V1::SessionsController < ApiController
   def new
     user = User.find_by(name: name)
     if user && user.authenticate(password)
-      render json: { success: "correct credentials" }
+      render json: user
     else
       render json: { failure: "bad credentials" }, status: 400
     end
