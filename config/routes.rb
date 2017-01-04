@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       post '/login', to: 'sessions#create'
 
       get '/me', to: 'users#me'
+
+      resources :users, only: [:create]
     end
   end
 end
