@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/comments', to: 'comments#index'
 
-      get '/login', to: 'sessions#new'
+      post '/login', to: 'sessions#create'
     end
   end
 end

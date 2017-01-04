@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < ApiController
 
-  def new
+  def create
     user = User.find_by(name: name)
     if user && user.authenticate(password)
       render json: user
