@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApiController
   end
 
   private
-
+  
     def name
       request.headers.env.detect{|k, _| k =~ /^HTTP_NAME/}[1]
     end

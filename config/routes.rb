@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       get '/comments', to: 'comments#index'
 
       post '/login', to: 'sessions#create'
+
+      get '/me', to: 'users#me'
     end
   end
 end
