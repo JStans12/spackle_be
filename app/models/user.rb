@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
 
   enum role: ["user", "admin"]
+  enum status: ["pending", "confirmed"]
+
   validates_presence_of   :name, :email
   validates_uniqueness_of :name, :email
 
@@ -32,5 +34,19 @@ class User < ApplicationRecord
     vote = ups.find_or_create_by(comment_id: comment.id)
     vote.update(value: 0)
     vote
+  end
+
+  def confirmed!
+    update(status: 1)
+    update(token: generate_token)
+  end
+
+  private
+
+  def generate_token
+    loop do
+      token = SecureRandom.hex(25)
+      break token unless User.where(token: token).exists?
+    end
   end
 end
