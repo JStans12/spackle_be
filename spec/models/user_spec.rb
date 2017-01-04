@@ -24,6 +24,8 @@ RSpec.describe User, type: :model do
     it { should respond_to :comments }
     it { should respond_to :pages }
     it { should respond_to :ups }
+    it { should respond_to :status }
+    it { should respond_to :token }
   end
 
   describe "model methods" do
@@ -76,6 +78,18 @@ RSpec.describe User, type: :model do
       expect(vote.user).to eq(user)
       expect(vote.comment).to eq(comment)
       expect(vote.value).to eq(0)
+    end
+
+    it "#confirmed" do
+      user = create(:user)
+
+      expect(user.status).to eq("pending")
+      expect(user.token).to eq(nil)
+
+      user.confirmed!
+
+      expect(user.status).to eq("confirmed")
+      expect(user.token.length).to eq(50)
     end
   end
 end
