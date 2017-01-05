@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
       resources :users, only: [:create] do
         get '/confirm_email', to: 'users#confirm_email'
+
+        resources :comments, only: [:create, :update, :destroy]
       end
     end
   end
