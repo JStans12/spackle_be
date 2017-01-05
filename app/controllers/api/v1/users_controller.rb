@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApiController
       UserMailer.registration_confirmation(user).deliver
       render json: { success: "account created" }
     else
-      render json: { failuer: "account creation failed" }
+      render json: { failuer: "account creation failed" }, status: 400
     end
   end
 
