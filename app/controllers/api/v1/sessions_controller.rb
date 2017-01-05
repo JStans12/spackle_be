@@ -1,21 +1,11 @@
 class Api::V1::SessionsController < ApiController
 
   def create
-    user = User.find_by(name: name)
-    if user && user.confirmed? && user.authenticate(password)
+    user = User.find_by(name: params["name"])
+    if user && user.confirmed? && user.authenticate(params["password"])
       render json: user
     else
       render json: { failure: "bad credentials" }, status: 400
     end
   end
-
-  private
-
-    def name
-      request.headers.env.detect{|k, _| k =~ /^HTTP_NAME/}[1]
-    end
-
-    def password
-      request.headers.env.detect{|k, _| k =~ /^HTTP_PASSWORD/}[1]
-    end
 end
