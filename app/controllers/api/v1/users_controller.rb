@@ -13,14 +13,14 @@ class Api::V1::UsersController < ApiController
       UserMailer.registration_confirmation(user).deliver
       render json: { success: "account created" }
     else
-      #render fail json
+      render json: { failuer: "account creation failed" }
     end
   end
 
   def confirm_email
-    user = User.find(params[:user_id])
-    if user.secret == params[:q]
-      user.confirmed!
+    @user = User.find(params[:user_id])
+    if @user.secret == params[:q]
+      @user.confirmed!
     else
       render file: "public/404", layout: false
     end
