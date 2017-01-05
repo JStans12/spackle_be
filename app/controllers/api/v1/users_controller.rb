@@ -3,7 +3,7 @@ require './app/controllers/mailer.rb'
 class Api::V1::UsersController < ApiController
 
   def me
-    user = User.find_by(token: token)
+    user = User.find_by(token: params["token"])
     render json: user
   end
 
@@ -27,10 +27,6 @@ class Api::V1::UsersController < ApiController
   end
 
   private
-
-    def token
-      request.headers.env.detect{|k, _| k =~ /^HTTP_TOKEN/}[1]
-    end
 
     def user_params
       params.permit(:name, :email, :password, :password_confirmation)
