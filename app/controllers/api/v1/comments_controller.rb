@@ -6,6 +6,19 @@ class Api::V1::CommentsController < ApiController
     render json: comments
   end
 
+  def create
+    user = User.find_by(token: params[:user_id])
+    page = Page.find_by(url: url)
+    parent = Comment.find(params[:parent_id]) if params[:parent_id].to_i > 0
+    body = params[:body]
+    if user
+      user.comment(body, page, parent)
+      render json: "success"
+    else
+      render json: "failure", status: 400
+    end
+  end
+
   private
 
     def url
