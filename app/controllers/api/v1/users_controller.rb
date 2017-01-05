@@ -1,3 +1,5 @@
+require './app/controllers/mailer.rb'
+
 class Api::V1::UsersController < ApiController
 
   def me
@@ -8,10 +10,19 @@ class Api::V1::UsersController < ApiController
   def create
     user = User.new(user_params)
     if user.save
-      # send confirmation email
-      # render success json
+      UserMailer.registration_confirmation(user).deliver
+      render json: { success: "account created" }
     else
       #render fail json
+    end
+  end
+
+  def confirm_email
+    user = User.find(params[:user_id])
+    if user.secret == params[:q]
+      user.confirmed!
+    else
+      render file: "public/404", layout: false
     end
   end
 

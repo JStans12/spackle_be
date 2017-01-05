@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_create :give_secret
+
   has_secure_password
 
   enum role: ["user", "admin"]
@@ -36,9 +38,15 @@ class User < ApplicationRecord
     vote
   end
 
+  def give_secret
+    update(secret: generate_token)
+  end
+
   def confirmed!
     update(status: 1)
     update(token: generate_token)
+    secret.clear
+    save
   end
 
   private
