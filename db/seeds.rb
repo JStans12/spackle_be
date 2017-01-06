@@ -6,6 +6,11 @@ kanye      = User.create(name: "yeezy", email: "yeezy@hotmail.com", password: "p
 donald     = User.create(name: "yugehands", email: "yugehands@hotmail.com", password: "p", password_confirmation: "p")
 taylor_fan = User.create(name: "kuntryboi69", email: "kuntryboi69@hotmail.com", password: "p", password_confirmation: "p")
 
+taylor.confirmed!
+kanye.confirmed!
+donald.confirmed!
+taylor_fan.confirmed!
+
 reddit = Page.create(url: "https://www.reddit.com/")
 
 unprovoked_aggression = kanye.comment("Taylor sucks!", reddit)
