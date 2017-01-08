@@ -1,11 +1,5 @@
 class Api::V1::CommentsController < ApiController
 
-  def index
-    page = Page.find_by(url: url)
-    comments = page.base_comments.by_score
-    render json: comments
-  end
-
   def create
     user = User.find(params[:user_id])
     page = Page.find_or_create_by(url: url)
