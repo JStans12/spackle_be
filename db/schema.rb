@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105014951) do
+ActiveRecord::Schema.define(version: 20170107210442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,9 @@ ActiveRecord::Schema.define(version: 20170105014951) do
     t.integer  "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "page_id"
     t.index ["comment_id"], name: "index_ups_on_comment_id", using: :btree
+    t.index ["page_id"], name: "index_ups_on_page_id", using: :btree
     t.index ["user_id"], name: "index_ups_on_user_id", using: :btree
   end
 
@@ -57,5 +59,6 @@ ActiveRecord::Schema.define(version: 20170105014951) do
   add_foreign_key "comments", "pages"
   add_foreign_key "comments", "users"
   add_foreign_key "ups", "comments"
+  add_foreign_key "ups", "pages"
   add_foreign_key "ups", "users"
 end
