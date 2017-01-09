@@ -7,9 +7,21 @@ class Api::V1::CommentsController < ApiController
     body = HtmlSanitizer.no_html(params[:body])
     if user && user.token == params[:token]
       user.comment(body, page, parent)
-      render json: "success"
+      render json: { success: "comment created" }
     else
-      render json: "failure", status: 400
+      render json: { failure: "invalid credentials" }, status: 400
+    end
+  end
+
+  def update
+    user = User.find(params[:user_id])
+    comment = Comment.find(params[:comment_id])
+    body = HtmlSanitizer.no_html(params[:body])
+    if user && user.token == params[:token] && user.comments.include?(comment)
+      comment.update(body: body)
+      render json: { success: "comment updated" }
+    else
+      render json: { failure: "invalid credentials" }, status: 400
     end
   end
 

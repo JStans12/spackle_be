@@ -3,16 +3,15 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/page', to: 'pages#show'
+      get '/me', to: 'users#me'
 
       post '/login', to: 'sessions#create'
 
-      get '/me', to: 'users#me'
-
       resources :users, only: [:create] do
         get '/confirm_email', to: 'users#confirm_email'
-        post '/ups',           to: 'ups#create'
 
-        resources :comments, only: [:create, :update, :destroy]
+        resources :ups, only: [:create]
+        resources :comments, only: [:create, :update, :destroy], param: :comment_id
       end
     end
   end
