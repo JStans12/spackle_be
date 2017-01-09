@@ -25,6 +25,19 @@ class Api::V1::CommentsController < ApiController
     end
   end
 
+  def destroy
+    user = User.find(params[:user_id])
+    comment = Comment.find(params[:comment_id])
+    body = HtmlSanitizer.no_html(params[:body])
+    if user && user.token == params[:token] && user.comments.include?(comment)
+      comment.update(user_id: 1, body: "deleted") unless comment.children.empty?
+      comment.destroy                             if comment.children.empty?
+      render json: { success: "comment updated" }
+    else
+      render json: { failure: "invalid credentials" }, status: 400
+    end
+  end
+
   private
 
     def url
