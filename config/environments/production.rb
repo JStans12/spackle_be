@@ -86,4 +86,17 @@ Rails.application.configure do
 
   # Setup action mailer for heroku
   config.action_mailer.default_url_options = { :host => 'https://polar-garden-93448.herokuapp.com/' }
+
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+
+    address: 'smtp.sendgrid.net',
+    port: '587',
+    authentication: :plain,
+    username: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    domain: 'heroku.com',
+    enable_starttls_auto: true
+  }
 end
