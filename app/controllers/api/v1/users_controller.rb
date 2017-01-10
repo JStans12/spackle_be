@@ -1,6 +1,7 @@
 require './app/controllers/mailer.rb'
 
 class Api::V1::UsersController < ApiController
+  layout 'application'
 
   def me
     user = User.find_by(token: params["token"])
