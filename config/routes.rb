@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+ root 'welcome#welcome'
+
   namespace :api do
     namespace :v1 do
       get '/page', to: 'pages#show'
