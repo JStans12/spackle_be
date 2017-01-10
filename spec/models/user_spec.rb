@@ -100,5 +100,18 @@ RSpec.describe User, type: :model do
       expect(user.status).to eq("confirmed")
       expect(user.token.length).to eq(50)
     end
+
+    it "#score" do
+      user, user2 = create_list(:user, 2)
+      page = create(:page)
+      comment = user.comment("Nice page!", page)
+
+      expect(user.score).to eq(1)
+      expect(user2.score).to eq(0)
+
+      user2.upvote(comment)
+
+      expect(user.score).to eq(2)
+    end
   end
 end
