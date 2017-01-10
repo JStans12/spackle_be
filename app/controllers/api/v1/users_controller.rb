@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApiController
       UserMailer.registration_confirmation(user).deliver
       render json: { success: "account created" }
     else
-      render json: { failure: "account creation failed" }, status: 400
+      render json: error(user, user_params), status: 400
     end
   end
 
@@ -21,5 +21,11 @@ class Api::V1::UsersController < ApiController
 
     def user_params
       params.permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def error(user, params)
+      return "passwords don't match" if params['password'] != params['password_confirmation']
+      return "username #{user.errors.messages[:name][0]}" if user.errors.messages[:name]
+      return ""
     end
 end
