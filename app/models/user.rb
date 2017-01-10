@@ -39,6 +39,12 @@ class User < ApplicationRecord
     vote
   end
 
+  def score
+    comments
+    .joins(:ups)
+    .sum('ups.value')
+  end
+
   def give_secret
     update(secret: generate_token)
   end
