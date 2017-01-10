@@ -27,7 +27,7 @@ describe Api::V1::PagesController do
       post '/api/v1/users', params: { name: "j", email: "j", password: "j", password_confirmation: "j" }
       message = response.body
 
-      expect(message).to eq("account created")
+      expect(message).to eq("{\"success\":\"account created\"}")
     end
   end
 end

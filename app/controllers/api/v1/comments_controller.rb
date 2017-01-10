@@ -7,9 +7,9 @@ class Api::V1::CommentsController < ApiController
     body = HtmlSanitizer.no_html(params[:body])
     if user && user.token == params[:token]
       user.comment(body, page, parent)
-      render json: "comment created"
+      render json: { success: "comment created" }
     else
-      render json: "invalid credentials", status: 400
+      render json: { failure: "invalid credentials" }, status: 400
     end
   end
 
@@ -19,9 +19,9 @@ class Api::V1::CommentsController < ApiController
     body = HtmlSanitizer.no_html(params[:body])
     if user && user.token == params[:token] && user.comments.include?(comment)
       comment.update(body: body)
-      render json: "comment updated"
+      render json: { success: "comment updated" }
     else
-      render json: "invalid credentials", status: 400
+      render json: { failure: "invalid credentials" }, status: 400
     end
   end
 
@@ -32,9 +32,9 @@ class Api::V1::CommentsController < ApiController
     if user && user.token == params[:token] && user.comments.include?(comment)
       comment.update(user_id: 1, body: "deleted") unless comment.children.empty?
       comment.destroy                             if comment.children.empty?
-      render json: "comment destroyed"
+      render json: { success: "comment destroyed" }
     else
-      render json: "invalid credentials", status: 400
+      render json: { failure: "invalid credentials" }, status: 400
     end
   end
 

@@ -10,7 +10,7 @@ describe Api::V1::CommentsController do
       post "/api/v1/users/#{user.id}/comments", params: { parent_id: 0, body: "WOO", token: user.token }, headers: {'HTTP_URL': reddit.url}
       message = response.body
 
-      expect(message).to eq("comment created")
+      expect(message).to eq("{\"success\":\"comment created\"}")
       expect(Comment.count).to eq(1)
       expect(Comment.first.body).to eq("WOO")
     end
@@ -27,7 +27,7 @@ describe Api::V1::CommentsController do
 
       message = response.body
 
-      expect(message).to eq("comment updated")
+      expect(message).to eq("{\"success\":\"comment updated\"}")
       expect(Comment.count).to eq(1)
       expect(Comment.first.body).to eq("BOO")
     end
@@ -44,7 +44,7 @@ describe Api::V1::CommentsController do
 
       message = response.body
 
-      expect(message).to eq("comment destroyed")
+      expect(message).to eq("{\"success\":\"comment destroyed\"}")
       expect(Comment.count).to eq(0)
     end
   end
