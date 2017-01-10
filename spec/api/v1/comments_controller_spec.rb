@@ -15,4 +15,21 @@ describe Api::V1::CommentsController do
       expect(Comment.first.body).to eq("WOO")
     end
   end
+
+  context "update" do
+    it "returns a success message and updates a comment" do
+      reddit = Page.create(url: "https://www.reddit.com/")
+      user = create(:user)
+      user.confirmed!
+      comment = user.comment("WOO", reddit)
+
+      put "/api/v1/users/#{user.id}/comments/#{comment.id}", params: { body: "BOO", token: user.token }
+
+      message = response.body
+
+      expect(message).to eq("comment updated")
+      expect(Comment.count).to eq(1)
+      expect(Comment.first.body).to eq("BOO")
+    end
+  end
 end
