@@ -106,12 +106,12 @@ RSpec.describe User, type: :model do
       page = create(:page)
       comment = user.comment("Nice page!", page)
 
-      expect(user.score).to eq(1)
+      expect(user.score).to eq(0)
       expect(user2.score).to eq(0)
 
       user2.upvote(comment)
 
-      expect(user.score).to eq(2)
+      expect(user.score).to eq(1)
     end
   end
 end
