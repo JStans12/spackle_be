@@ -18,6 +18,15 @@ RSpec.describe User, type: :model do
     it { should validate_uniqueness_of :name }
     it { should validate_uniqueness_of :email }
     it { should have_secure_password }
+    it { should validate_length_of :name }
+
+    it "doesn't allow spaces or s.characters in name" do
+      user = User.new(name: "n d", email: "e", password: "p", password_confirmation: "p")
+      user2 = User.new(name: "n&$", email: "e", password: "p", password_confirmation: "p")
+
+      expect(user).to be_invalid
+      expect(user2).to be_invalid
+    end
   end
 
   describe "relationships" do

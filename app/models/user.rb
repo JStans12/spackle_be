@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   validates_presence_of   :name, :email
   validates_uniqueness_of :name, :email
+  validates :name, format: { with: /\A[a-zA-Z0-9]+\Z/ }, length: { maximum: 64 }
 
   has_many :comments, dependent: :destroy
   has_many :pages, through: :comments

@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
   validates_presence_of :body
+  validates :body, length: { maximum: 10000 }
 
   belongs_to :user
   belongs_to :page
