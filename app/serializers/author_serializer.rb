@@ -1,3 +1,3 @@
 class AuthorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email
+  attributes :id, :name, :score
 end

@@ -42,6 +42,7 @@ class User < ApplicationRecord
   def score
     comments
     .joins(:ups)
+    .where.not('ups.user_id = comments.user_id')
     .sum('ups.value')
   end
 
