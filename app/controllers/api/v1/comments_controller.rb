@@ -32,7 +32,7 @@ class Api::V1::CommentsController < ApiController
     if user && user.token == params[:token] && user.comments.include?(comment)
       comment.update(user_id: 1, body: "deleted") unless comment.children.empty?
       comment.destroy                             if comment.children.empty?
-      render json: "comment updated"
+      render json: "comment destroyed"
     else
       render json: "invalid credentials", status: 400
     end

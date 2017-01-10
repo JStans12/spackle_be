@@ -32,4 +32,20 @@ describe Api::V1::CommentsController do
       expect(Comment.first.body).to eq("BOO")
     end
   end
+
+  context "destroy" do
+    it "returns a success message and deletes a comment" do
+      reddit = Page.create(url: "https://www.reddit.com/")
+      user = create(:user)
+      user.confirmed!
+      comment = user.comment("WOO", reddit)
+
+      delete "/api/v1/users/#{user.id}/comments/#{comment.id}", params: { body: "", token: user.token }
+
+      message = response.body
+
+      expect(message).to eq("comment destroyed")
+      expect(Comment.count).to eq(0)
+    end
+  end
 end
