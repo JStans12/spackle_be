@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
  root 'welcome#welcome'
+ get '/confirm_email', to: 'users#confirm_email'
 
   namespace :api do
     namespace :v1 do
@@ -10,7 +11,6 @@ Rails.application.routes.draw do
       post '/login', to: 'sessions#create'
 
       resources :users, only: [:create] do
-        get '/confirm_email', to: 'users#confirm_email'
 
         resources :ups, only: [:create]
         resources :comments, only: [:create, :update, :destroy], param: :comment_id
