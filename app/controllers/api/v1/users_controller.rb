@@ -21,6 +21,7 @@ class Api::V1::UsersController < ApiController
     @user = User.find(params[:user_id])
     if @user.secret == params[:q]
       @user.confirmed!
+      render :confirm_email, layout: 'application'
     else
       render file: "public/404", layout: false
     end
