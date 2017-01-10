@@ -12,9 +12,9 @@ class Api::V1::UpsController < ApiController
         up.update(value: params[:value].to_i)
       end
 
-      render json: { success: "vote tallied" }
+      render json: "vote tallied"
     else
-      render json: { failure: "invalid credentials" }, status: 400
+      render json: "invalid credentials", status: 400
     end
   end
 end
