@@ -16,4 +16,8 @@
 
 .spackle {
   font-family: 'Special Elite', cursive;
+  font-size: 22px;
+  position: absolute;
+  left: 5%;
+  top: 5%;
 }
