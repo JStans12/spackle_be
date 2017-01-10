@@ -11,7 +11,7 @@ class Api::V1::UsersController < ApiController
     user = User.new(user_params)
     if user.save
       UserMailer.registration_confirmation(user).deliver
-      render json: { success: "account created" }
+      render json: "account created"
     else
       render json: error(user, user_params), status: 400
     end

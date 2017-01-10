@@ -20,4 +20,14 @@ describe Api::V1::PagesController do
       expect(me[:score]).to eq(1)
     end
   end
+
+  context '/create' do
+    it "returns a success message" do
+
+      post '/api/v1/users', params: { name: "j", email: "j", password: "j", password_confirmation: "j" }
+      message = response.body
+
+      expect(message).to eq("account created")
+    end
+  end
 end
