@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
  root 'welcome#welcome'
- get '/confirm_email', to: 'users#confirm_email'
+ get '/confirm_email/:user_id', to: 'users#confirm_email'
 
   namespace :api do
     namespace :v1 do
