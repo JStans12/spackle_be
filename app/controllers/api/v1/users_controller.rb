@@ -25,7 +25,8 @@ class Api::V1::UsersController < ApiController
 
     def error(user, params)
       return "passwords don't match" if params['password'] != params['password_confirmation']
-      return "username #{user.errors.messages[:name][0]}" if user.errors.messages[:name]
+      return "email #{user.errors.messages[:email][0]}" if user.errors.messages.has_key?(:email)
+      return "username #{user.errors.messages[:name][0]}" if user.errors.messages.has_key?(:name)
       return ""
     end
 end
