@@ -30,4 +30,36 @@ describe Api::V1::PagesController do
       expect(message).to eq("{\"success\":\"account created\"}")
     end
   end
+
+  context 'create sad path mismatch' do
+    it "returns an error message" do
+
+      post '/api/v1/users', params: { name: "j", email: "j", password: "t", password_confirmation: "j" }
+      message = response.body
+
+      expect(message).to eq("passwords don't match")
+    end
+  end
+
+  context 'create sad path email taken' do
+    it "returns an error message" do
+      User.create(name: "j", email: "j", password: "j", password_confirmation: "j")
+
+      post '/api/v1/users', params: { name: "t", email: "j", password: "j", password_confirmation: "j" }
+      message = response.body
+
+      expect(message).to eq("email has already been taken")
+    end
+  end
+
+  context 'create sad path name taken' do
+    it "returns an error message" do
+      User.create(name: "j", email: "j", password: "j", password_confirmation: "j")
+
+      post '/api/v1/users', params: { name: "j", email: "t", password: "j", password_confirmation: "j" }
+      message = response.body
+
+      expect(message).to eq("username has already been taken")
+    end
+  end
 end
